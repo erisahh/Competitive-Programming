@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+#define int long long
+
+using namespace std;
+
+const int INF = 1e10;
+
+void solve(){
+	int n, m, k, q; cin >> n >> m >> k >> q;
+
+	vector<vector<int>> ar(n, vector<int> (m, INF));
+	for(int i = 0; i < q; i++){
+		int a, b, d; cin >> a >> b >> d;
+		a--;
+		b--;
+		ar[a][b] = d;
+	}
+	
+	vector<int> mx;
+	for(int i = 0; i < n; i++){
+		if(i + k > n ) break;
+		//cout << "i " <<  i << endl;
+		for(int j = 0; j < m; j++){
+			int x = 0;
+			if(j + k > m) break;
+		//	cout << "j " <<  j << endl;
+			for(int l = i; l < i + k; l++){
+				for(int p = j; p < j + k; p++){
+					//cout << "l " << l << "p " << p << endl;
+					//cout << ar[l][p] << endl;
+					x = max(x, ar[l][p]);
+				}
+			}
+			//cout << x << endl;
+			if(x != 0) mx.push_back(x);
+		}
+	}
+
+	sort(mx.begin(), mx.end());
+	if(mx[0] == INF) cout << - 1 << endl;
+	else cout << mx[0] << endl;
+}
+
+signed main(){
+	cin.tie(0)->sync_with_stdio(0);
+    solve();	
+}
+
